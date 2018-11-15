@@ -1,4 +1,4 @@
-### clone
+# clone
 JavaScript之深拷贝和浅拷贝
 ## 前言
 工作中会经常遇到操作数组、对象的情况，你肯定会将原数组、对象进行‘备份’
@@ -6,11 +6,11 @@ JavaScript之深拷贝和浅拷贝
 如果你对拷贝原理理解的不透彻，此文或许能提供一点帮助。
 
 ## javascript数据类型
-# 基本数据类型
+### 基本数据类型
 string、number、null、undefined、boolean、symbol(ES6新增) 变量值存放在栈内存中，可直接访问和修改变量的值
 基本数据类型不存在拷贝，好比如说你无法修改数值1的值
 
-# 引用类型
+### 引用类型
 Object Function RegExp Math Date 值为对象，存放在堆内存中
 在栈内存中变量保存的是一个指针，指向对应在堆内存中的地址。
 当访问引用类型的时候，要先从栈中取出该对象的地址指针，然后再从堆内存中取得所需的数据
@@ -18,7 +18,7 @@ Object Function RegExp Math Date 值为对象，存放在堆内存中
 ## 浅拷贝
 为什么备份的数组对象也会发生变化，这里就涉及到你用的‘备份’其实是一种浅拷贝
 
-# 简单的引用拷贝
+### 简单的引用拷贝
 ```bash
 var a = [1,2,3,4];
 var b = a;
@@ -29,7 +29,7 @@ console.log(a,b);//(4) [0, 2, 3, 4] (4) [0, 2, 3, 4]
 
 可以看到数组a直接赋值给b，a、b引用的其实是一个对象地址，只要地址值发生变化，a、b栈内存指针指向的堆地址也会发生变化，这种引用拷贝只是新增了一个变量栈内存的指针，意义不大
 
-# 数组的concat、slice，对象的assign拷贝
+### 数组的concat、slice，对象的assign拷贝
 同样的例子
 ```bash
 var a = [1,2,3,4];
@@ -88,7 +88,7 @@ var clone = function(obj){
 ## 深拷贝
 深拷贝是可以完美的解决浅拷贝的弊端，重新开辟一块地址，深拷贝出来的属性的基本类型值都是相同的。
 
-# JSON内置对象深拷贝
+### JSON内置对象深拷贝
  JSON 对象是ES5中引入的新的类型（支持的浏览器为IE8+），JSON对象parse方法可以将JSON字符串反序列化成JS对象，stringify方法可以将JS对象序列化成JSON字符串，借助这两个方法，也可以实现对象的深拷贝
 ```bash
 var a = {age:1,name:'ccy',info:{address:'wuhan',interest:'playCards'}};
@@ -100,7 +100,7 @@ console.log(a.info,b.info);//{address: "shenzhen", interest: "playCards"} {addre
  JSON 可处理一般的对象进行深拷贝，但是不能处理函数、正则等对象
 
  我们可以对自定义的拷贝函数再进行优化
- # 深拷贝函数
+ ### 深拷贝函数
  ```bash
  var clone = function(obj){
         function getType(obj){
