@@ -14,6 +14,24 @@ var clone = function(obj){
             var attr = a.substring(c+1);
             return new RegExp(reg, attr);
         }
+        function cloneArray(obj){ 
+            var res = []; 
+            for(var item in obj){ 
+                if(obj[item] === obj) continue; 
+                if(getType(obj[item]) === 'Function'){ 
+                    res[item] = new Function("return "+obj[item].toString())(); 
+                }else if(getType(obj[item]) === 'RegExp'){ 
+                    res[item] = getReg(obj[item].toString()); 
+                }else if(getType(obj[item]) === 'Object'){ 
+                    res[item] = clone(obj[item]); 
+                }else if(getType(obj[item]) === 'Array'){ 
+                    res[item] = cloneArray(obj[item]); 
+                }else{ 
+                    res[item] = obj[item]; 
+                } 
+            } 
+            return res; 
+        }
         var construct = getType(obj);
         var res;
         if(construct === 'Array'){
@@ -29,6 +47,8 @@ var clone = function(obj){
                 res[item] = getReg(obj[item].toString());
             }else if(getType(obj[item]) === 'Object'){
                 res[item] = clone(obj[item]);
+            }else if(getType(obj[item]) === 'Array'){ 
+                res[item] = cloneArray(obj[item]); 
             }else{
                 res[item] = obj[item];
             }
